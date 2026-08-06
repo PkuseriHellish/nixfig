@@ -77,7 +77,6 @@
     bottles
     nomacs
     vesktop
-    #aseprite
     librewolf-bin
     haruna
     vscodium
