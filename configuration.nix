@@ -118,7 +118,7 @@
   home-manager.backupFileExtension = "hm-backup";
 
   home-manager.users.mad = { pkgs, ... }: {
-    home.stateVersion = "26.05"; # keep in sync with system.stateVersion below
+    home.stateVersion = "26.05";
 
     # User-scoped packages (things you don't want system-wide)
     home.packages = with pkgs; [
