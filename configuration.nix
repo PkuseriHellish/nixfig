@@ -41,7 +41,7 @@
 
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-
+  xdg.portal.config.common.default = "gtk";
   # Storage, auto-mounting & file manager services
   services.udisks2.enable = true;
   services.gvfs.enable = true;
