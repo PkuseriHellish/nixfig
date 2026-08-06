@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
 
-    nixpkgs-blender36.url = "github:NixOS/nixpkgs/nixos-23.11";
+    nixpkgs-blender36.url = "github:NixOS/nixpkgs/nixos-23.05";
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
