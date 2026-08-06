@@ -141,6 +141,7 @@
     shellAliases = {
       nix-rebuild = "sudo nixos-rebuild switch --flake /etc/nixos#nixos";
       nix-update = "cd /etc/nixos && sudo nix flake update && sudo nixos-rebuild switch --flake .#nixos && cd -";
+      nix-whynot = "sudo nix-collect-garbage -d && sudo nix store optimise && sudo nixos-rebuild switch --flake /etc/nixos#nixos";
     };
   };
 
