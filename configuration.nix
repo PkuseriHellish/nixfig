@@ -74,7 +74,7 @@
     ffmpeg
 
     # Applications
-    bottles
+    wineWow64Packages.staging
     nomacs
     vesktop
     librewolf-bin
