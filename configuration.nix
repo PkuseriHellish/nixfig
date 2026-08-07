@@ -60,8 +60,15 @@
       libvdpau-va-gl
     ];
   };
-
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+  };
   # === PACKAGES ===
+  programs.steam.enable = true;
+  programs.steam.gamescopeSession.enable = true;
+  programs.gamemode.enable = true;
   environment.systemPackages = with pkgs; [
 
   home-manager #ayo sus!!
@@ -72,7 +79,10 @@
     micro
     rsync
     ffmpeg
+    gallery-dl
+    yt-dlp
 
+    mangohud
     # Applications
     wineWow64Packages.staging
     nomacs
