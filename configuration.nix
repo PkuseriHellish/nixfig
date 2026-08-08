@@ -135,31 +135,28 @@
     ];
     # add the git here
     programs.git = {
-  enable = true;
-  lfs.enable = true;
- 
+      enable = true;
+      lfs.enable = true;
 
-  settings = {
-     user.name = "Mad";
-  user.email = "187168704+PkuseriHellish@users.noreply.github.com";
-    init.defaultBranch = "main";
-  };
-};
-      programs.bash = {
-    enable = true;
+      settings = {
+        user.name = "Mad";
+        user.email = "187168704+PkuseriHellish@users.noreply.github.com";
+        init.defaultBranch = "main";
+      };
+    };
+    programs.bash = {
+      enable = true;
 
-shellAliases = {
-  nix-rebuild = "sudo nixos-rebuild switch --flake /etc/nixos#nixos";
-  
-  # Uses the absolute path for both the flake update and the rebuild switch
-  nix-update = "sudo nix flake update --flake /etc/nixos && sudo nixos-rebuild switch --flake /etc/nixos#nixos";
-  
-  # Safely optimizes, rebuilds via absolute path, and cleans up older configurations
-  nix-whynot = "sudo nix store optimise && sudo nixos-rebuild switch --flake /etc/nixos#nixos && sudo nix-collect-garbage --delete-older-than 7d";
-};
-
-
-  };
+      shellAliases = {
+        nix-rebuild = "sudo nixos-rebuild switch --flake /etc/nixos#nixos";
+        
+        # Fixed: Updates the lockfile and instantly stages it so Nix commands recognize it
+        nix-update = "sudo nix flake update --flake /etc/nixos && git -C /etc/nixos add /etc/nixos/flake.lock && sudo nixos-rebuild switch --flake /etc/nixos#nixos";
+        
+        # Safely optimizes, rebuilds via absolute path, and cleans up older configurations
+        nix-whynot = "sudo nix store optimise && sudo nixos-rebuild switch --flake /etc/nixos#nixos && sudo nix-collect-garbage --delete-older-than 7d";
+      };
+    };
 
     # Let home-manager manage itself
     programs.home-manager.enable = true;
