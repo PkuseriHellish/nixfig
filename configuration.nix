@@ -148,11 +148,16 @@
       programs.bash = {
     enable = true;
 
-    shellAliases = {
-      nix-rebuild = "sudo nixos-rebuild switch --flake /etc/nixos#nixos";
-      nix-update = "cd /etc/nixos && sudo nix flake update && sudo nixos-rebuild switch --flake .#nixos && cd -";
-      nix-whynot = "sudo nix-collect-garbage -d && sudo nix store optimise && sudo nixos-rebuild switch --flake /etc/nixos#nixos";
-    };
+   shellAliases = {
+  nix-rebuild = "sudo nixos-rebuild switch --flake /etc/nixos#nixos";
+  
+  # Uses a subshell () to prevent 'cd -' from echoing or failing if /etc/nixos is missing
+  nix-update = "(cd /etc/nixos && sudo nix flake update && sudo nixos-rebuild switch --flake .#nixos)";
+  
+  # Safely optimizes first, rebuilds, and ONLY deletes older profiles if the build succeeds
+  nix-whynot = "sudo nix store optimise && sudo nixos-rebuild switch --flake /etc/nixos#nixos && sudo nix-collect-garbage --delete-older-than 7d";
+};
+
   };
 
     # Let home-manager manage itself
