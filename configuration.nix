@@ -80,14 +80,17 @@
 
     mangohud
     # Applications
+    kdePackages.filelight
     wineWow64Packages.staging
+    winetricks
     nomacs
     vesktop
-    librewolf-bin
+    firefox
     haruna
     vscodium
     qbittorrent
   ];
+  
   services.flatpak.enable = true;
   
   fonts.packages = with pkgs; [
