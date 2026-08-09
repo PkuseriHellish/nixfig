@@ -38,10 +38,14 @@
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true; # offer the Wayland Plasma session
 
+  # Use the KDE portal for Plasma sessions (gtk portal kept as a fallback
+  # for non-KDE apps; the gnome portal was dropped since it conflicts with
+  # Plasma's own file pickers / screen-share / portal implementation)
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde pkgs.xdg-desktop-portal-gtk ];
+  };
 
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  xdg.portal.config.common.default = "gtk";
   # Storage, auto-mounting & file manager services
   services.udisks2.enable = true;
   services.gvfs.enable = true;
@@ -56,15 +60,25 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
+    # intel-media-driver (iHD) only reliably supports Broadwell (Gen8) and
+    # newer; Haswell (Gen7.5) needs the legacy i965 driver instead.
     extraPackages = with pkgs; [
-      intel-media-driver
+      intel-vaapi-driver
       libvdpau-va-gl
     ];
   };
+  # Force the legacy i965 VA-API driver, since iHD doesn't support Haswell
+  environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "i965";
+  };
+
   # === PACKAGES ===
   programs.steam.enable = true;
   programs.steam.gamescopeSession.enable = true;
   programs.gamemode.enable = true;
+    virtualisation.waydroid.enable = true;
+  # Newer kernel versions may need
+  virtualisation.waydroid.package = pkgs.waydroid-nftables;
   environment.systemPackages = with pkgs; [
 
   home-manager #ayo sus!!
@@ -77,6 +91,7 @@
     ffmpeg
     gallery-dl
     yt-dlp
+    wl-clipboard
 
     mangohud
     # Applications
@@ -144,6 +159,7 @@
         init.defaultBranch = "main";
       };
     };
+    
     programs.bash = {
       enable = true;
 
