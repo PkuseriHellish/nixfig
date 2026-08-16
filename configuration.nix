@@ -74,9 +74,7 @@ hardware.graphics = {
   programs.steam.enable = true;
   programs.steam.gamescopeSession.enable = true;
   programs.gamemode.enable = true;
-    virtualisation.waydroid.enable = true;
-  # Newer kernel versions may need
-  virtualisation.waydroid.package = pkgs.waydroid-nftables;
+  
   environment.systemPackages = with pkgs; [
 
   home-manager #ayo sus!!
