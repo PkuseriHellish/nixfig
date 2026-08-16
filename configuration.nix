@@ -102,7 +102,7 @@
     vesktop
     firefox
     aseprite # yay 42 minutes on my haswell
-    ungoogled-chromium # incase if xitter does something stupid like those weird inlines
+    ungoogled-chromium # incase if webstites hates firefox for some reason (why???)
     haruna
     vscodium
     qbittorrent
