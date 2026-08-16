@@ -165,22 +165,32 @@
     programs.bash = {
       enable = true;
 
-      shellAliases = {
-        nix-rebuild = "sudo nixos-rebuild switch --flake /etc/nixos#nixos";
-        
-        # Fixed: Updates the lockfile and instantly stages it so Nix commands recognize it
-       nix-update = ''
-         cd /etc/nixos &&
-         sudo nix flake update &&
-         git add flake.lock &&
-         sudo nixos-rebuild build --flake .#nixos &&
-         sudo nixos-rebuild switch --flake .#nixos &&
-         cd -
-       '';
-       
-        # Safely optimizes, rebuilds via absolute path, and cleans up older configurations
-        nix-whynot = "sudo nix store optimise && sudo nixos-rebuild switch --flake /etc/nixos#nixos && sudo nix-collect-garbage --delete-older-than 7d";
-      };
+     shellAliases = {
+  # Switch to the current config
+  nix-rebuild = "sudo nixos-rebuild switch --flake /etc/nixos#nixos";
+
+  # Activate without adding a boot entry — good for testing before committing
+  nix-test = "sudo nixos-rebuild test --flake /etc/nixos#nixos";
+
+  # Escape hatch if a switch goes bad
+  nix-rollback = "sudo nixos-rebuild switch --rollback";
+
+  # Update inputs, verify it actually builds, switch, THEN stage the lockfile
+  nix-update = ''
+    cd /etc/nixos &&
+    nix flake update &&
+    sudo nixos-rebuild build --flake .#nixos &&
+    sudo nixos-rebuild switch --flake .#nixos &&
+    git add flake.lock &&
+    cd -
+  '';
+
+  # Dedupe store paths
+  nix-optimise = "sudo nix store optimise";
+
+  # GC old generations — run this deliberately, not glued to every rebuild
+  nix-gc = "sudo nix-collect-garbage --delete-older-than 7d";
+};
     };
 
     # Let home-manager manage itself
