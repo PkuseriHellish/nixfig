@@ -57,16 +57,14 @@
   # === HARDWARE (Intel Haswell-ULT) ===
   hardware.cpu.intel.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-    # intel-media-driver (iHD) only reliably supports Broadwell (Gen8) and
-    # newer; Haswell (Gen7.5) needs the legacy i965 driver instead.
-    extraPackages = with pkgs; [
-      intel-vaapi-driver
-      libvdpau-va-gl
-    ];
-  };
+hardware.graphics = {
+  enable = true;
+  enable32 = true;
+  extraPackages = with pkgs; [
+    intel-media-driver   # Broadwell (2014)+ — T440s is Haswell (2013), so see note below
+    intel-vaapi-driver    # for older Haswell-gen Intel iGPU (your T440s)
+  ];
+};
   # Force the legacy i965 VA-API driver, since iHD doesn't support Haswell
   environment.sessionVariables = {
     LIBVA_DRIVER_NAME = "i965";
