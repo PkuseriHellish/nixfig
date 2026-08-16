@@ -96,11 +96,13 @@
     mangohud
     # Applications
     kdePackages.filelight
-    wineWow64Packages.staging
+	wineWow64Packages.full
     winetricks
     nomacs
     vesktop
     firefox
+    aseprite # yay 42 minutes on my haswell
+    ungoogled-chromium # incase if xitter does something stupid like those weird inlines
     haruna
     vscodium
     qbittorrent
@@ -167,8 +169,15 @@
         nix-rebuild = "sudo nixos-rebuild switch --flake /etc/nixos#nixos";
         
         # Fixed: Updates the lockfile and instantly stages it so Nix commands recognize it
-        nix-update = "sudo nix flake update --flake /etc/nixos && git -C /etc/nixos add /etc/nixos/flake.lock && sudo nixos-rebuild switch --flake /etc/nixos#nixos";
-        
+       nix-update = ''
+         cd /etc/nixos &&
+         sudo nix flake update &&
+         git add flake.lock &&
+         sudo nixos-rebuild build --flake .#nixos &&
+         sudo nixos-rebuild switch --flake .#nixos &&
+         cd -
+       '';
+       
         # Safely optimizes, rebuilds via absolute path, and cleans up older configurations
         nix-whynot = "sudo nix store optimise && sudo nixos-rebuild switch --flake /etc/nixos#nixos && sudo nix-collect-garbage --delete-older-than 7d";
       };
