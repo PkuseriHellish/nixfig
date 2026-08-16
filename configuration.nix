@@ -59,7 +59,7 @@
   hardware.enableRedistributableFirmware = true;
 hardware.graphics = {
   enable = true;
-  enable32 = true;
+  enable32Bit = true;
   extraPackages = with pkgs; [
     intel-media-driver   # Broadwell (2014)+ — T440s is Haswell (2013), so see note below
     intel-vaapi-driver    # for older Haswell-gen Intel iGPU (your T440s)
