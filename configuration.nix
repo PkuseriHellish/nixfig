@@ -95,6 +95,7 @@ hardware.graphics = {
     # Applications
     kdePackages.filelight
 	wineWow64Packages.full
+  blender
     winetricks
     nomacs
     vesktop
