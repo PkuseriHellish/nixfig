@@ -46,11 +46,6 @@
     extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde pkgs.xdg-desktop-portal-gtk ];
   };
 
-  # Storage, auto-mounting & file manager services
-  services.udisks2.enable = true;
-  services.gvfs.enable = true;
-  services.tumbler.enable = true; # thumbnails (Dolphin uses this too)
-
   security.polkit.enable = true;   
   programs.dconf.enable = true;    
 
@@ -78,7 +73,6 @@ hardware.graphics = {
   environment.systemPackages = with pkgs; [
 
   home-manager #ayo sus!!
-    # Archives & CLI utilities
     unrar
     zip
     unzip
@@ -87,16 +81,12 @@ hardware.graphics = {
     ffmpeg
     gallery-dl
     yt-dlp
-    wl-clipboard
 
-    mangohud
-    # Applications
     kdePackages.filelight
 	wineWow64Packages.full
   blender
   prismlauncher
     winetricks
-    nomacs
     vesktop
     firefox
     aseprite # yay 42 minutes on my haswell
