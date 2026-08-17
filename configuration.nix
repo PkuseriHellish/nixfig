@@ -104,6 +104,7 @@ hardware.graphics = {
     noto-fonts-color-emoji
     dejavu_fonts
     liberation_ttf
+    iosevka
     nerd-fonts.jetbrains-mono
   ];
 
