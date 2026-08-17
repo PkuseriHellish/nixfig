@@ -154,7 +154,7 @@ hardware.graphics = {
       lfs.enable = true;
 
       settings = {
-        user.name = "Mad";
+        user.name = "Sop";
         user.email = "187168704+PkuseriHellish@users.noreply.github.com";
         init.defaultBranch = "main";
       };
