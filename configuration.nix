@@ -86,6 +86,7 @@ hardware.graphics = {
 	wineWow64Packages.stable
   blender
   prismlauncher
+  mcpelauncher-ui-qt
     winetricks
     vesktop
     firefox
