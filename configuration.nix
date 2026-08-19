@@ -83,7 +83,7 @@ hardware.graphics = {
     yt-dlp
 
     kdePackages.filelight
-	wineWow64Packages.full
+	wineWow64Packages.stable
   blender
   prismlauncher
     winetricks
@@ -199,6 +199,5 @@ hardware.graphics = {
       options = "--delete-older-than 14d";
     };
   };
-
   system.stateVersion = "26.05";
 }
