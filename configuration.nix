@@ -86,7 +86,6 @@ hardware.graphics = {
 	wineWow64Packages.stable
   blender
   prismlauncher
-  mcpelauncher-ui-qt
     winetricks
     vesktop
     firefox
@@ -133,24 +132,7 @@ hardware.graphics = {
   home-manager.useUserPackages = true;
   home-manager.backupFileExtension = "hm-backup";
 
-  home-manager.users.mad = { pkgs, ... }: {
-    home.stateVersion = "26.05";
 
-    # User-scoped packages (things you don't want system-wide)
-    home.packages = with pkgs; [
-    # ...
-    ];
-    # add the git here
-    programs.git = {
-      enable = true;
-      lfs.enable = true;
-
-      settings = {
-        user.name = "Sop";
-        user.email = "187168704+PkuseriHellish@users.noreply.github.com";
-        init.defaultBranch = "main";
-      };
-    };
     
     programs.bash = {
       enable = true;
