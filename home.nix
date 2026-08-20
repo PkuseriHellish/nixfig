@@ -1,3 +1,5 @@
+# home.nix
+
 { pkgs, ... }:
 {
   home.username = "mad";
@@ -34,7 +36,7 @@
       '';
       nix-optimise = "sudo nix store optimise";
       nix-gc       = "sudo nix-collect-garbage --delete-older-than 7d";
-      hm-switch    = "home-manager switch --flake /etc/nixos#mad";
+      hm-switch = "home-manager switch --flake /etc/nixos#mad";
     };
   };
 

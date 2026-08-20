@@ -1,3 +1,5 @@
+# flake.nix
+
 {
   description = "NixOS configeee";
 
@@ -18,6 +20,7 @@
   outputs = { self, nixpkgs, home-manager, nixos-hardware, ... }:
   let
     system = "x86_64-linux";
+
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
@@ -26,15 +29,19 @@
   {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       inherit system;
+
       modules = [
         ./configuration.nix
         nixos-hardware.nixosModules.lenovo-thinkpad-t440s
+        home-manager.nixosModules.home-manager
       ];
     };
 
     homeConfigurations.mad = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      modules = [ ./home.nix ];
+      modules = [
+        ./home.nix
+      ];
     };
   };
 }
